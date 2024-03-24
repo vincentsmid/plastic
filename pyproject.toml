@@ -2,7 +2,7 @@
 name = "main_app"
 version = "0.1.0"
 description = ""
-authors = ["vincentsmid <vincent.smid@greenpanda.cz>"]
+authors = ["vincentsmid <vincent.smid@seznam.cz>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
