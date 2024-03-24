@@ -69,8 +69,6 @@ uvicorn main_app.main:app --reload --host 0.0.0.0 --port 8000
 
 ## File structure - change as you need, but a lot will probably remain the same
 
-An example taken from [our CDN](https://gitlab.gpcz.eu/green-panda/cdn).
-
 ```
 /
 │
