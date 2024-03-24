@@ -1,6 +1,6 @@
-# FastAPI template repository
+# Plastic
 
-This is a template repository to be cloned and built upon when creating a new project. Environment is managed by poetry, templating by jinja, fastAPI for api, SQLite DB for development, PiccoloORM with its admin and more.
+Plastic is made to take orders for my 3D printing business.
 
 Dev environment completely automatised on docker.
 
