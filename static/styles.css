@@ -1,65 +1,117 @@
-:root {
-  --body-background-color: #f4f4f4;
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
-  --h2-color: #333;
-
-  --form-background-color: #fff;
-  --form-border-color: #ddd;
-  --button-background-color: #5cb85c;
-  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background-color: var(--body-background-color);
+  font-family: 'Source Code Pro', monospace;
+  background-color: #000;
+  color: #fff;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-h2 {
-  color: var(--h2-color);
+.main-content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 50px 20px;
+  width: 80vw; /* Adjust this value based on your design preference */
 }
 
-form {
-  background: var(--form-background-color);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: var(--box-shadow);
-  margin-bottom: 20px;
+.top-bar {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 80vw;
+  margin: 0 auto;
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
+.top-bar button {
+  margin-left: 2rem; /* Adds space between buttons if you have multiple */
+  min-width: 5rem;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="checkbox"] {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 16px;
-  border-radius: 4px;
-  border: 1px solid var(--form-border-color);
-  box-sizing: border-box; /* Ensures padding does not affect overall width */
+.right-buttons {
+  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+  max-width: fit-content;
 }
 
-input[type="checkbox"] {
-  width: auto;
+.footer {
+  color: #fff;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: auto; /* Pushes the footer to the bottom */
 }
 
-input[type="checkbox"] :checked {
-  background-color: var(--button-background-color) !important;
+input, button, textarea {
+  font-family: 'Source Code Pro', monospace;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 15px;
+  margin: 8px 0;
+  transition: all 0.3s ease;
+  appearance: none;
+  border-radius: 0;
+  height: 3.2rem;
+}
+
+::placeholder {
+  color: #bbb;
+}
+
+input:hover, textarea:hover,
+input:focus, textarea:focus {
+  background-color: #222;
+  outline: none;
 }
 
 button {
-  background-color: var(--button-background-color);
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
-button:hover {
-  background-color: var(--button-background-color);
+button:hover, button:active {
+  background-color: #fff;
+  color: #000;
+}
+
+input:disabled, button:disabled, textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }

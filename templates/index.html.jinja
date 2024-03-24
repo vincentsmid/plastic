@@ -5,109 +5,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ app_name }}</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-
-    }
-
-    h1 {
-      font-size: 3.5rem;
-    }
-
-    p {
-      font-size: 1.5rem;
-    }
-
-    a {
-      color: #000;
-      text-decoration: underline dotted;
-    }
-
-    a:hover {
-      color: #000;
-      text-decoration: underline;
-    }
-
-    body {
-      color: #000;
-
-      font-family: "Outfit", sans-serif;
-      font-style: normal;
-
-      background-color: #4de800;
-
-      overflow: hidden;
-    }
-
-    .container {
-      text-align: center;
-
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    footer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    footer p {
-      font-size: 1rem;
-      font-weight: normal;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
 
 <body>
-  <div class="container">
-    <h1>{{ app_name }}</h1>
-    <p>You have succesfully found the server index</p>
-
-    <svg style="display: none;" width="914" height="523" viewBox="0 0 914 523" fill="none"
-      xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M817.311 119.566C805.977 119.566 793.206 125.849 786.661 137.002C783.468 142.5 781.074 148.155 781.074 153.653C781.074 162.292 785.863 171.089 794.802 174.23C806.136 178.943 818.907 173.445 827.846 159.151C832.635 151.297 835.03 144.071 835.03 137.002C835.03 126.007 827.846 119.566 817.311 119.566ZM397.155 353.303C360.918 363.67 337.611 371.524 302.971 373.88C273.119 376.237 260.349 374.666 232.892 373.095C232.892 373.095 242.629 336.652 242.629 307.278C242.629 251.043 207.989 210.673 155.629 207.532C137.111 206.746 120.19 210.673 104.865 218.684C72.6192 235.335 56.4962 255.127 48.5146 262.981C40.5329 270.835 25.2081 285.13 17.8649 277.276C12.2777 270.992 24.2502 250.415 41.9695 219.47C59.6889 187.739 91.1367 141.086 128.172 110.927C186.119 64.2736 279.505 41.9681 366.505 38.8265C366.505 38.8265 390.61 82.3379 401.944 179.885C405.136 209.259 406.733 235.335 406.733 258.269C406.892 320.002 397.155 353.303 397.155 353.303ZM645.864 266.123C645.864 266.123 645.864 232.822 625.75 198.735C605.636 163.078 575.785 147.998 570.197 109.199C565.408 78.2538 577.381 42.5964 577.381 42.5964C577.381 42.5964 674.758 48.8796 678.748 49.665C671.565 84.537 682.739 110.613 704.449 110.613C722.169 110.613 724.563 90.8203 730.949 75.7405C736.536 63.017 743.081 55.1628 751.062 53.592C783.308 55.1628 808.211 67.8864 829.123 88.4641C855.623 114.54 848.439 139.987 853.228 168.418C856.421 187.425 862.008 202.505 876.535 224.653C876.535 224.653 870.947 231.722 868.553 242.089C866.158 254.028 869.351 263.452 869.351 263.452L842.054 285.601C804.221 273.663 763.993 267.38 722.169 264.238C699.022 262.981 669.33 262.981 645.864 266.123ZM890.582 217.899C880.047 201.248 872.065 179.885 868.872 162.449C863.285 133.075 872.065 112.497 843.171 80.1388C821.461 56.4195 797.356 44.4813 756.969 38.9835C756.171 16.835 744.039 1.75534 727.117 0.184528C697.266 -2.95709 684.495 35.0564 684.495 35.0564C684.495 35.0564 585.522 27.9878 550.084 25.4745C509.058 23.1183 470.427 21.5475 434.19 21.5475C288.444 19.9766 180.691 48.4084 118.594 99.1456C82.3569 128.52 49.3127 175.173 26.8044 213.972C6.69052 249.629 -9.4325 273.349 9.08501 289.999C21.2172 301.152 39.7347 292.355 48.5146 283.716C57.2944 410.48 95.9258 522.95 130.566 522.95H259.391C259.391 472.999 205.434 473.784 208.627 458.076C212.618 439.069 229.539 388.332 229.539 388.332C244.864 389.903 260.189 390.688 274.556 390.688C294.67 390.688 313.187 389.117 329.31 386.761C384.863 378.122 453.346 347.962 473.459 347.962C477.45 347.962 479.845 348.748 479.845 351.889C479.047 355.816 470.107 405.768 470.107 450.065C470.107 488.078 476.492 522.95 499.16 522.95H630.379C630.379 472.999 578.02 477.083 582.968 457.134C590.152 424.618 640.915 325.657 644.906 282.145C670.607 278.218 696.468 279.004 722.169 280.574C764.791 282.931 797.037 290.156 827.687 298.01C835.668 300.367 845.406 303.508 852.59 298.01L913.729 247.273C914.049 247.116 899.522 231.251 890.582 217.899Z"
-        fill="black" />
-    </svg>
+  <div class="top-bar">
+    <h1><a href="/">{{ app_name }}</a></h1>
+    <div class="right-buttons">
+      <button>Calculate your STL</button>
+      <button>Shop</button>
+      <button>Custom design</button>
+    </div>
   </div>
 
-  <footer>
-    <p style="text-align: center; color: #000;">Powered by <a href="https://greenpanda.cz" target="_blank">Green Panda</a>.
+  <div class="main-content">
+
+    <p>Welcome to vincent's printing service.</p>
+    <p>Here you can calculate the price of your 3D print, shop for 3D prints, or request a custom design.</p>
+    <p></p>
+  </div>
+
+  <div class="footer">
+    <p style="text-align: center">Built by <a href="https://vincentsmid.xyz" target="_blank">vincent</a>.
     </p>
-  </footer>
+  </div>
 
-  <script>
-    const svgs_with_random_positions = Array.from(Array(10).keys()).map(_ => {
-      const svg = document.querySelector('svg').cloneNode(true);
-      svg.style.display = 'block';
-      svg.style.position = 'absolute';
-      svg.style.top = `${Math.random() * 100}vh`;
-      svg.style.left = `${Math.random() * 100}vw`;
-      svg.style.transform = `translate(-50%, -50%)`;
-      svg.style.zIndex = -1;
-      svg.style.opacity = 0.05;
-      svg.style.width = `${Math.random() * 100}vw`;
-      svg.style.height = `${Math.random() * 100}vh`;
-      return svg;
-    });
-
-    svgs_with_random_positions.forEach(svg => {
-      document.body.appendChild(svg);
-    });
-  </script>
 </body>
 
 </html>
