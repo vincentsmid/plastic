@@ -35,7 +35,7 @@ async def root(request: Request):
     - TemplateResponse: The response containing the rendered "index.html" template.
     """
     return templates.TemplateResponse(
-        "index.html.jinja", {"request": request, "app_name": "FastAPI Template app"}
+        "index.html.jinja", {"request": request, "app_name": "Plastic"}
     )
 
 
