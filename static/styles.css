@@ -26,17 +26,48 @@ body {
   width: 80vw; /* Adjust this value based on your design preference */
 }
 
+.card {
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+  height: 30rem;
+  margin: 1rem; /* Add this line */
+  position: relative; /* Add this line */
+}
+
+.card-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap; /* Add this line */
+}
+
+.card button {
+  position: absolute; /* Add this line */
+  bottom: 0; /* Add this line */
+  margin-bottom: 1rem;
+  width: 22rem;
+}
+
 .top-bar {
   padding: 10px 20px;
   display: flex;
   justify-content: space-evenly;
   width: 80vw;
   margin: 0 auto;
+  flex-wrap: wrap;;
 }
 
 .top-bar button {
   margin-left: 2rem; /* Adds space between buttons if you have multiple */
   min-width: 5rem;
+  border: none;
 }
 
 .right-buttons {
@@ -63,7 +94,7 @@ input, button, textarea {
   transition: all 0.3s ease;
   appearance: none;
   border-radius: 0;
-  height: 3.2rem;
+  min-height: 3.2rem;
 }
 
 ::placeholder {
