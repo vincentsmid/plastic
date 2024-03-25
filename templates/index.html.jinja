@@ -8,14 +8,50 @@
   <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
 
+<style>
+  .card {
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-backgroud-color);
+    padding: 2.5rem;
+    margin: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    width: 35rem;
+    height: 48rem;
+    margin: 2rem 1.6rem;
+    position: relative;
+  }
+
+  .card-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+
+  .card button {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 1.6rem;
+    width: 30rem;
+  }
+
+  .card button:hover {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: 0.1rem solid var(--primary-color);
+  }
+</style>
+
 <body>
   <div class="top-bar">
     <h1><a href="/">{{ app_name }}</a></h1>
     <div class="right-buttons">
-      <button>Calculate your STL</button>
-      <button>Shop</button>
-      <button>Custom design</button>
-      <button style="border: 1px solid #fff">Materials and colors</button>
+      <button class="calculateBtn">Calculate your STL</button>
+      <button class="shopBtn">Shop</button>
+      <button class="customDesignBtn">Custom design</button>
+      <button style="border: 1px solid var(--text-color)">Materials and colors</button>
     </div>
   </div>
 
@@ -28,19 +64,19 @@
         <h2>Calculate your STL</h2>
         <p>Do you have your own STL and would you like to have it printed in a wide range of materials and colors?</p>
         <p>Upload it into my custom form and get an instant quote.</p>
-        <button>Calculate</button>
+        <button class="calculateBtn">Calculate</button>
       </div>
       <div class="card">
         <h2>Premade models</h2>
         <p>If you are looking for a case for your keyboard, there is a chance i have already made a case for it.</p>
         <p>Look through my past models and see what you like.</p>
-        <button>Shop</button>
+        <button class="shopBtn">Shop</button>
       </div>
       <div class="card">
         <h2>Custom design</h2>
         <p>If you have a keyboard you want a case made for and you have specific requirements or I just have not yet made case for it.</p>
         <p>Request a custom design and I will get back to you with a quote.</p>
-        <button>Contact me</button>
+        <button class="customDesignBtn">Contact me</button>
       </div>
     </div>
   </div>
@@ -49,6 +85,26 @@
     <p style="text-align: center">Built by <a href="https://vincentsmid.xyz" target="_blank">vincent</a>.
     </p>
   </div>
+
+  <script>
+    document.querySelectorAll('.calculateBtn').forEach(button => {
+      button.addEventListener('click', function() {
+        window.location.href = '/calculator';
+      });
+    });
+
+    document.querySelectorAll('.shopBtn').forEach(button => {
+      button.addEventListener('click', function() {
+        window.location.href = '/shop';
+      });
+    });
+
+    document.querySelectorAll('.customDesignBtn').forEach(button => {
+      button.addEventListener('click', function() {
+        window.location.href = '/custom-design';
+      });
+    });
+  </script>
 
 </body>
 
