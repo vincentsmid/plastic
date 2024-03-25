@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ app_name }}</title>
+  <link rel="stylesheet" type="text/css" href="/static/styles.css">
+  <link rel="script" type="text/javascript" href="/static/script.js">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+  {% include 'top_bar.html.jinja' %}
+
+  <div class="main-content">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  {% include 'footer.html.jinja' %}
+
+  <script src="/static/script.js"></script>
+
+  <script>
+
+    document.querySelectorAll('.calculateBtn').forEach(button => {
+      button.addEventListener('click', function() {
+        window.location.href = '/calculator';
+      });
+    });
+
+    document.querySelectorAll('.shopBtn').forEach(button => {
+      button.addEventListener('click', function() {
+        window.location.href = '/shop';
+      });
+    });
+
+    document.querySelectorAll('.customDesignBtn').forEach(button => {
+      button.addEventListener('click', function() {
+        window.location.href = '/custom-design';
+      });
+    });
+
+    document.querySelectorAll('.materialsColors').forEach(button => {
+      button.addEventListener('click', function() {
+        window.location.href = '/materials-and-colors';
+      });
+    });
+
+
+  </script>
+
+</body>
+
+</html>

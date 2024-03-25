@@ -40,7 +40,7 @@ async def root(request: Request):
 
 @app.get("/calculator")
 async def calculator_render(request: Request):
-    return templates.TemplateResponse("calculator.html.jinja", {"request": request, "app_name": "Plastic calculator"})
+    return templates.TemplateResponse("calculator.html.jinja", {"request": request, "app_name": "Plastic"})
 
 
 # Include the router from router.py
