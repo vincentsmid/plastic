@@ -31,7 +31,7 @@ async def calculate_price(to_calculate: UploadFile = File(...)):
   if file_extension.lower() != ".stl":
     return JSONResponse(status_code=400, content={"message": "Invalid file format. Only .stl files are allowed."})
   
-  command = "slic3r --help"
+  command = "prusaslicer --help"
 
   # Execute the command
   result = subprocess.run(command, shell=True, capture_output=True, text=True)
