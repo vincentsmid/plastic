@@ -1,8 +1,10 @@
 import logging
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+
+from pydantic import BaseModel
 
 # from main_app.db_models import ()
 from piccolo.apps.user.tables import BaseUser
@@ -42,9 +44,19 @@ async def root(request: Request):
 async def calculator_render(request: Request):
     return templates.TemplateResponse("calculator.html.jinja", {"request": request, "app_name": "Plastic"})
 
-@app.get("/items/{price}/{filament_used}/{total_hours}")
-async def read_item_page(request: Request, price: float, filament_used: float, total_hours: float):
-    return templates.TemplateResponse("result.html.jinja", {"request": request, "price": price, "filament_used": filament_used, "total_hours": total_hours})
+class ResultData(BaseModel):
+    price: float
+    filament_used: float
+    total_hours: float
+
+@app.post("/calculator-results")
+async def render_results(request: Request, data: ResultData):
+    return templates.TemplateResponse("result.html.jinja", {
+        "request": request, 
+        "price": data.price, 
+        "filament_used": data.filament_used, 
+        "total_hours": data.total_hours
+    })
 
 # Include the router from router.py
 app.include_router(api_router.router, prefix="/api/v1")

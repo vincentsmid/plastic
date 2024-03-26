@@ -52,12 +52,29 @@ async function uploadFile(file) {
   .then(response => response.json())
   .then(data => {
     if (data.price && data.filament_used && data.total_hours) {
-        const url = `/items/${data.price}/${data.filament_used}/${data.total_hours}`;
-        window.location.href = url;
+      const postData = {
+          price: data.price,
+          filament_used: data.filament_used,
+          total_hours: data.total_hours
+      };
+
+      fetch('/calculator-results', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(postData)
+      })
+      .then(response => response.text())
+      .then(html => {
+          document.body.innerHTML = html;
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
     } else {
         console.error("Expected data not found in response");
     }
-
   })
   .catch(error => {
     document.getElementById('loadingIndicator').style.display = 'none';
