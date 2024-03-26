@@ -1,6 +1,13 @@
-from piccolo.columns import Varchar
+from piccolo.columns import Varchar, Integer, Timestamp, Real, Boolean
 from piccolo.table import Table
 
 
-class RandomTable(Table):
-    name = Varchar()
+class PotentialOrdersFromEstimate(Table):
+    orderID = Integer(primary_key=True)
+    orderValue = Varchar()
+    printTime = Real()
+    orderDate = Timestamp()
+    filamentUsed = Real()
+    filamentType = Varchar()
+    discordName = Varchar()
+    contacted = Boolean()
