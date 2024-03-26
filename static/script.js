@@ -36,7 +36,12 @@ function handleFile(e) {
   uploadFile(file);
 }
 
-function uploadFile(file) {
+async function uploadFile(file) {
+  document.getElementById('loadingIndicator').style.display = 'block';
+  document.getElementById('fileInput').disabled = true;
+
+  longLoadMessage();
+  
   const formData = new FormData();
   formData.append('to_calculate', file);
 
@@ -44,14 +49,28 @@ function uploadFile(file) {
     method: 'POST',
     body: formData
   })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.error(error);
-    });
+  .then(response => response.json())
+  .then(data => {
+    if (data.price && data.filament_used && data.total_hours) {
+        const url = `/items/${data.price}/${data.filament_used}/${data.total_hours}`;
+        window.location.href = url;
+    } else {
+        console.error("Expected data not found in response");
+    }
+
+  })
+  .catch(error => {
+    document.getElementById('loadingIndicator').style.display = 'none';
+    console.error(error);
+  });
 }
+
+function longLoadMessage() {
+  setTimeout(() => {
+    document.getElementById('longLoad').style.display = 'block';
+  }, 5000);
+}
+
 
 $(function() {
   const sparkleSettings = {

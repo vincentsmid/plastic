@@ -10,18 +10,21 @@ from fastapi import APIRouter, Form, Request, File, UploadFile
 import os
 import re
 from fastapi.responses import JSONResponse
+from fastapi.templating import Jinja2Templates
 
 import shutil
 from tempfile import mkdtemp
 
 router = APIRouter()
 
+templates = Jinja2Templates(directory="templates")
+
 load_dotenv()
 
 router = APIRouter()
 
 @router.post("/")
-async def calculate_price(to_calculate: UploadFile = File(...)):
+async def calculate_price(request: Request, to_calculate: UploadFile = File(...)):
     """
     Calculate the price of the plastic based on the given data.
 
@@ -68,20 +71,17 @@ async def calculate_price(to_calculate: UploadFile = File(...)):
                             hours = int(time_match.group(1))
                             minutes = int(time_match.group(2))
                             seconds = int(time_match.group(3))
-                            print(hours, minutes, seconds)
                             total_hours = hours + minutes / 60 + seconds / 3600
                         else:
                             time_match = re.search(r"(\d+)m (\d+)s", line)
                             if time_match:
                                 minutes = int(time_match.group(1))
                                 seconds = int(time_match.group(2))
-                                print(minutes, seconds)
                                 total_hours = minutes / 60 + seconds / 3600
                             else:
                                 time_match = re.search(r"(\d+)s", line)
                                 if time_match:
                                     seconds = int(time_match.group(1))
-                                    print(seconds)
                                     total_hours = seconds / 3600
                     except:
                         raise Exception("Error parsing the estimated printing time.")
@@ -89,5 +89,7 @@ async def calculate_price(to_calculate: UploadFile = File(...)):
         shutil.rmtree(unique_dir)
 
     price = 8 + total_hours + filament_used * 0.05
+
+    # return templates.TemplateResponse("result.html.jinja", {"request": request, "price": price, "filament_used": filament_used, "total_hours": total_hours})
 
     return {"price": price, "filament_used": filament_used, "total_hours": total_hours}

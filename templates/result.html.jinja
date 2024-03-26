@@ -1,0 +1,10 @@
+{% extends 'base.html.jinja' %}
+
+{% block content %}
+  <div class="results">
+    <h2>Calculation Results</h2>
+    <p><strong>Price:</strong> {{ price | safe }}</p>
+    <p><strong>Filament Used:</strong> {{ filament_used | safe }} grams</p>
+    <p><strong>Total Printing Hours:</strong> {{ total_hours | safe }}</p>
+  </div>
+{% endblock %}
