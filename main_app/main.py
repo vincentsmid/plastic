@@ -55,7 +55,8 @@ async def render_results(request: Request, data: ResultData):
         "request": request, 
         "price": data.price, 
         "filament_used": data.filament_used, 
-        "total_hours": data.total_hours
+        "total_hours": data.total_hours,
+        "app_name": "Plastic"
     })
 
 # Include the router from router.py
