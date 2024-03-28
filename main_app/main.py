@@ -59,6 +59,10 @@ async def render_results(request: Request, data: ResultData):
         "app_name": "Plastic"
     })
 
+@app.get("/shop")
+async def shop_render(request: Request):
+    return templates.TemplateResponse("shop.html.jinja", {"request": request, "app_name": "Shop"})
+
 # Include the router from router.py
 app.include_router(api_router.router, prefix="/api/v1")
 

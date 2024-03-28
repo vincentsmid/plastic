@@ -126,6 +126,30 @@ svg {
 }
 
 
+/* Shop styles */
+
+.shop-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80ch, 1fr));
+  gap: 1rem;
+}
+
+.shop-items h2 {
+  margin: 0;
+}
+
+.shop-items article {
+  border: 1px solid var(--text-color);
+
+  padding: 1rem;
+}
+
+.shop-items button {
+  font-size: 1.6rem;
+
+  width: 100%;
+}
+
 
 /* Top bar styles */
 
