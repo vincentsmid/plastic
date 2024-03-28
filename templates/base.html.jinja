@@ -8,10 +8,18 @@
   <link rel="stylesheet" type="text/css" href="/static/styles.css">
   <link rel="script" type="text/javascript" href="/static/script.js">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.162.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.162.0/examples/jsm/"
+    }
+  }
+</script>
 </head>
 
 <body>
-
   {% include 'top_bar.html.jinja' %}
 
   <div class="main-content">
@@ -22,6 +30,8 @@
   {% include 'footer.html.jinja' %}
 
   <script src="/static/script.js"></script>
+
+  
 
   <script>
 
