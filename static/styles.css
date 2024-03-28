@@ -67,6 +67,7 @@ body {
   bottom: 0;
   margin-bottom: 1.6rem;
   width: 30rem;
+  font-size: 1.6rem;
 }
 
 .card button:hover {
