@@ -15,6 +15,8 @@ from fastapi.templating import Jinja2Templates
 import shutil
 from tempfile import mkdtemp
 
+from main_app.db_models import PotentialOrdersFromEstimate
+
 router = APIRouter()
 
 templates = Jinja2Templates(directory="templates")
@@ -90,6 +92,13 @@ async def calculate_price(request: Request, to_calculate: UploadFile = File(...)
 
     price = 8 + total_hours + filament_used * 0.05
 
+    new_order = PotentialOrdersFromEstimate(
+        orderValue=price,
+        printTime=total_hours,
+        filamentUsed=filament_used,
+    )
+    await new_order.save().run()
+
     # return templates.TemplateResponse("result.html.jinja", {"request": request, "price": price, "filament_used": filament_used, "total_hours": total_hours})
 
-    return {"price": price, "filament_used": filament_used, "total_hours": total_hours}
+    return {"price": price, "filament_used": filament_used, "total_hours": total_hours, "order_id": new_order.id}

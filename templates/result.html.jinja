@@ -2,9 +2,33 @@
 
 {% block content %}
   <div class="results">
-    <h2>Calculation Results</h2>
+    <h1>Calculation Results</h1>
     <p><strong>Price:</strong> {{ price | safe }}</p>
     <p><strong>Filament Used:</strong> {{ filament_used | safe }} grams</p>
     <p><strong>Total Printing Hours:</strong> {{ total_hours | safe }}</p>
+    <p>{{ order_id }}</p>
+    <form action="/submit" method="POST">
+      <div class="form-group">
+        <label for="discord_name">Discord Name:</label>
+        <input type="text" id="discord_name" name="discord_name" required>
+      </div>
+      <div class="form-group">
+        <label for="filament_selection">Filament Selection:</label>
+        <select id="filament_selection" name="filament_selection" required>
+          {% for filament in filament_available %}
+            <option value="{{ filament.filamentName }}">{{ filament.filamentName }} {{filament.filamentDescription}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="filament_selection">Color aelection:</label>
+        <select id="filament_selection" name="filament_selection" required>
+          {% for material in filament_materials %}
+            <option value="{{ material.material }}">{{ material.material }} multiplier: {{material.multiplier}}</option>
+          {% endfor %}
+        </select>
+      <button type="submit">Submit</button>
+    </form>
   </div>
 {% endblock %}
+

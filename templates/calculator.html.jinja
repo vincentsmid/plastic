@@ -22,6 +22,11 @@
     <button onclick="location.reload()">Try again</button>
   </div>
 
-  <div id="resultIndicator" style="" class="popupLarge popup">
-  </div>
+  {# <div id="resultIndicator" style="display: none;" class="popupLarge popup">
+    <p id="resultPrice">The price is: <span id="price">0</span>€</p>
+    {% for filament in filament_available %}
+      <button>{{ filament.material }} multiplier: {{filament.multiplier}}</button>
+    {% endfor %}
+    <button onclick="location.reload()">Upload another file</button>
+  </div> #}
 {% endblock %}

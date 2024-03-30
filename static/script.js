@@ -51,20 +51,10 @@ async function uploadFile(file) {
   })
   .then(response => response.json())
   .then(data => {
-    if (data.price && data.filament_used && data.total_hours) {
-      const postData = {
-          price: data.price,
-          filament_used: data.filament_used,
-          total_hours: data.total_hours
-      };
+    if (data.price && data.filament_used && data.total_hours && data.order_id) {
+      const url = `/calculator-results/${data.order_id}`;
 
-      fetch('/calculator-results', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(postData)
-      })
+      fetch(url)
       .then(response => response.text())
       .then(html => {
           document.body.innerHTML = html;
