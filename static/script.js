@@ -73,7 +73,9 @@ async function uploadFile(file) {
           console.error('Error:', error);
       });
     } else {
-        console.error("Expected data not found in response");
+      document.getElementById('loadingIndicator').style.display = 'none';
+      document.getElementById('fileInput').disabled = false;
+      document.getElementById('errorIndicator').style.display = 'block';
     }
   })
   .catch(error => {

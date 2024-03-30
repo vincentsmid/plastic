@@ -12,8 +12,16 @@
     </div>
   </div>
 
-  <div id="loadingIndicator" style="display: none;">
+  <div id="loadingIndicator" style="display: none;" class="popupSmall popup">
     <p>Calculating...</p>
     <p id="longLoad" style="display: none">This may take a while for large files.</p>
+  </div>
+
+  <div id="errorIndicator" style="display: none;" class="popupSmall popup">
+    <p>This file is broken or too large.</p>
+    <button onclick="location.reload()">Try again</button>
+  </div>
+
+  <div id="resultIndicator" style="" class="popupLarge popup">
   </div>
 {% endblock %}

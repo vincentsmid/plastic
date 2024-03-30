@@ -112,17 +112,35 @@ svg {
   display: none;
 }
 
-#loadingIndicator {
+.popupSmall {
   width: 30rem;
   height: 20rem;
+}
+
+.popupSmall button {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1.6rem;
+  width: 24rem;
+  font-size: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.popup {
   border: 0.1rem solid var(--text-color);
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 500;
+  z-index: 1;
   background-color: var(--background-color);
   padding: 2rem;
+}
+
+.popupLarge {
+  width: 80%;
+  height: 70rem;
 }
 
 
@@ -139,8 +157,6 @@ svg {
 }
 
 .shop-items article {
-  border: 1px solid var(--text-color);
-
   padding: 1rem;
 }
 
@@ -160,6 +176,7 @@ svg {
   width: 80vw;
   margin: 0 auto;
   flex-wrap: wrap;;
+  z-index: 3;
 }
 
 .top-bar a {
