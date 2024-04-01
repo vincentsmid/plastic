@@ -21,7 +21,7 @@ class FilamentMaterials(Table):
   multiplier = Real()
 
 class FilamentsStock(Table):
-  filamentType = ForeignKey(references=FilamentMaterials)
+  filamentType = ForeignKey(references="FilamentMaterials")
   filamentStock = Integer()
   filamentInfinite = Boolean()
   filamentPrice = Real()
