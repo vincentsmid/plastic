@@ -1,12 +1,9 @@
-# Start from a base image with both Python and necessary utilities
 FROM python:3.11-bullseye
 
-# Set the working directory in the container
 WORKDIR /usr/src/app
 
 # Install system dependencies for downloading and extracting PrusaSlicer
-# Note: PrusaSlicer requires GTK3 for its GUI components, but your use case seems to run it headlessly.
-# Ensure all dependencies for running PrusaSlicer in your desired configuration are installed.
+# Note: PrusaSlicer requires GTK3 for its GUI components, even though we are not using the GUI in this case, it's still better to have it installed. 
 RUN apt-get update && apt-get install -y wget bzip2 libc6 libgtk-3-0  libgl1 mesa-utils && rm -rf /var/lib/apt/lists/*
 
 # Download PrusaSlicer - make sure to include correct architecture (my dev is arm64)
@@ -20,7 +17,6 @@ RUN tar -xjf prusaslicer.tar.bz2 -C /opt/ && rm prusaslicer.tar.bz2
 # Assuming PrusaSlicer-2.7.2+linux-arm64-GTK3 directory structure is used:
 RUN ln -s /opt/PrusaSlicer-2.7.2+linux-arm64-GTK3-202402291318/prusa-slicer /usr/local/bin/prusaslicer
 
-# Copy the current directory contents into the container
 COPY . /usr/src/app
 
 # Install poetry
