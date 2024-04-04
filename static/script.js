@@ -1,3 +1,5 @@
+// Calculator drop menu handling
+
 const dropArea = document.getElementById('dropArea');
 const fileInput = document.getElementById('fileInput');
 
@@ -35,6 +37,8 @@ function handleFile(e) {
 
   uploadFile(file);
 }
+
+// Upload file function for calculator
 
 async function uploadFile(file) {
   document.getElementById('loadingIndicator').style.display = 'block';
@@ -74,12 +78,15 @@ async function uploadFile(file) {
   });
 }
 
+// Function for displaying a "long load" message
+
 function longLoadMessage() {
   setTimeout(() => {
     document.getElementById('longLoad').style.display = 'block';
   }, 5000);
 }
 
+// Sparkle effect
 
 $(function() {
   const sparkleSettings = {
