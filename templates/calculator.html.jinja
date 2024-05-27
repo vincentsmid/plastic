@@ -2,6 +2,21 @@
 
 {% block content %}
   <p style="font-size: 2.4rem">If you have a custom stl ready, you can calculate the approximate price by uploading it into or clicking the puddle.</p>
+  <form action="/submit" method="POST">
+    <div class="form-group">
+      <label for="discord_name">Discord Name:</label>
+      <input type="text" id="discord_name" name="discord_name" required>
+    </div>
+    <div class="form-group">
+      <label for="filament_selection">Filament Selection:</label>
+      <select id="filament_selection" name="filament_selection" required>
+        {% for filament in filament_colors %}
+          <option value="{{ filament.filamentName }}">{{ filament.filamentName }} {{filament.filamentDescription}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
   <div class="inputBox">
     <div id="dropArea">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60">

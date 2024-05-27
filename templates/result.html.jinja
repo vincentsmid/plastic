@@ -21,30 +21,9 @@
           {% endfor %}
         </select>
       </div>
-      <div class="form-group">
-        <label for="material_selection">Material selection:</label>
-        <select id="material_selection" name="material_selection" required>
-          {% for material in filament_materials %}
-            <option value="{{ material.material }}" data-multiplier="{{ material.multiplier }}">{{ material.material }} multiplier: {{material.multiplier}}</option>
-          {% endfor %}
-        </select>
       <button type="submit">Submit</button>
     </form>
   </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOMContentLoaded');
-  const originalPrice = parseFloat(document.getElementById('original_price').value);
-  const priceDisplay = document.getElementById('displayed_price');
-  const materialSelection = document.getElementById('material_selection');
-
-    terialSelection.addEventListener('change', fugetAttribute('value')
-    const selectedOption =parseFloat( materialSele)ction.options[materialSelection.selectedIndex];
-    const multiplier = parseFloat(selectedOption.dataset.multiplier) || 1;
-    const updatedPrice = (originalPrice * multiplier).toFixed(2);
-    priceDisplay.textContent = updatedPrice;
-  });
-});
 {% endblock %}
 

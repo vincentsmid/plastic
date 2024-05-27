@@ -101,4 +101,4 @@ async def calculate_price(request: Request, to_calculate: UploadFile = File(...)
 
     # return templates.TemplateResponse("result.html.jinja", {"request": request, "price": price, "filament_used": filament_used, "total_hours": total_hours})
 
-    return {"price": price, "filament_used": filament_used, "total_hours": total_hours, "order_id": new_order.id}
+    return {"price": price, "filament_used": filament_used, "total_hours": total_hours, "order_id": str(new_order.orderID)}

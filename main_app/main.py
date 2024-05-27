@@ -9,7 +9,7 @@ from pydantic import BaseModel
 # from main_app.db_models import ()
 from piccolo.apps.user.tables import BaseUser
 from piccolo_admin.endpoints import create_admin
-from main_app.db_models import PotentialOrdersFromEstimate, FilamentsStock, FilamentMaterials
+from main_app.db_models import PotentialOrdersFromEstimate, FilamentsStock
 
 from main_app.api.api_admin import router as admin_router
 from main_app.api.api_v1 import router as api_router
@@ -22,7 +22,7 @@ logger.info("Server restarted")
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 admin = create_admin(
-    tables=[BaseUser, PotentialOrdersFromEstimate, FilamentMaterials, FilamentsStock]  # Add any Piccolo tables you want to manage here.
+    tables=[BaseUser, PotentialOrdersFromEstimate, FilamentsStock]  # Add any Piccolo tables you want to manage here.
 )
 
 
@@ -43,8 +43,8 @@ async def root(request: Request):
 
 @app.get("/calculator")
 async def calculator_render(request: Request):
-  filament_available = await FilamentMaterials.objects().run()
-  return templates.TemplateResponse("calculator.html.jinja", {"request": request, "app_name": "Plastic", "filament_available": filament_available})
+  filament_available = await FilamentsStock.objects().where(FilamentsStock.active == True).run()
+  return templates.TemplateResponse("calculator.html.jinja", {"request": request, "app_name": "Plastic", "filament_colors": filament_available})
 
 class ResultData(BaseModel):
     price: float
@@ -52,10 +52,9 @@ class ResultData(BaseModel):
     total_hours: float
 
 @app.get("/calculator-results/{order_id}")
-async def render_results(request: Request, order_id: int):
+async def render_results(request: Request, order_id: str):
     filament_available = await FilamentsStock.objects().where(FilamentsStock.active == True).run()
-    filament_materials = await FilamentMaterials.objects().run()
-    data = await PotentialOrdersFromEstimate.objects().where(PotentialOrdersFromEstimate.id == order_id).first().run()
+    data = await PotentialOrdersFromEstimate.objects().where(PotentialOrdersFromEstimate.orderID == order_id).first().run()
 
     return templates.TemplateResponse("result.html.jinja", {
         "request": request, 
@@ -65,7 +64,6 @@ async def render_results(request: Request, order_id: int):
         "app_name": "Plastic",
         "order_id": order_id,
         "filament_available": filament_available,
-        "filament_materials": filament_materials
     })
 
 @app.get("/shop")
