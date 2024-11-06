@@ -35,7 +35,7 @@ async def root(request: Request):
     current_sales = await SpecialSale.objects().where(SpecialSale.active == True).run()
     return templates.TemplateResponse(
         "index.html.jinja",
-        {"request": request, "app_name": "Plastic", "sales": current_sales},
+        {"request": request, "app_name": "Plastic Labs", "sales": current_sales},
     )
 
 
@@ -48,7 +48,7 @@ async def calculator_render(request: Request):
         "calculator.html.jinja",
         {
             "request": request,
-            "app_name": "Plastic",
+            "app_name": "Plastic Labs",
             "filament_colors": filament_available,
         },
     )
@@ -89,7 +89,7 @@ async def render_results(request: Request, order_id: str):
 @app.get("/shop")
 async def shop_render(request: Request):
     return templates.TemplateResponse(
-        "shop.html.jinja", {"request": request, "app_name": "Shop"}
+        "shop.html.jinja", {"request": request, "app_name": "Plastic Labs"}
     )
 
 
