@@ -1,29 +1,44 @@
 {% extends 'base.html.jinja' %}
 
 {% block content %}
-  <div class="results">
-    <h1>Calculation Results</h1>
-    <input type="hidden" id="original_price" value="{{ price }}">
-    <p><strong>Price:</strong> <span id="displayed_price">{{ price | safe }}</span></p>
-    <p><strong>Filament Used:</strong> {{ filament_used | safe }} grams</p>
-    <p><strong>Total Printing Hours:</strong> {{ total_hours | safe }}</p>
-    <p>{{ order_id }}</p>
-    <form action="/submit" method="POST">
-      <div class="form-group">
-        <label for="discord_name">Discord Name:</label>
-        <input type="text" id="discord_name" name="discord_name" required>
-      </div>
-      <div class="form-group">
-        <label for="filament_selection">Filament Selection:</label>
-        <select id="filament_selection" name="filament_selection" required>
-          {% for filament in filament_available %}
-            <option value="{{ filament.filamentName }}">{{ filament.filamentName }} {{filament.filamentDescription}}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+<div class="results">
+  <h1>Calculation Results</h1>
+  <input type="hidden" id="original_price" value="{{ price }}">
+  <p><strong>Price:</strong> <span id="displayed_price">{{ price | safe }}</span></p>
+  <p><strong>Filament Used:</strong> {{ filament_used | safe }} grams</p>
+  <p><strong>Total Printing Hours:</strong> {{ total_hours | safe }}</p>
+  <p>Order ID: {{ order_id }}</p>
+
+  <form action="/api/v1/submitorder" method="POST">
+    <input type="hidden" name="order_id" value="{{ order_id }}">
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+
+    <div class="filament-grid">
+      {% for filament in filament_available %}
+        {% if filament.available %}
+          <div class="filament-card">
+            <input type="radio" id="filament_{{ filament.filamentID }}" 
+                   name="filament_id" value="{{ filament.filamentID }}" required>
+            <label for="filament_{{ filament.filamentID }}" class="filament-label">
+              <img src="{{ filament.filamentPicture }}" alt="{{ filament.filamentMaterial }} {{ filament.filamentColor }}">
+              <div class="filament-info">
+                <h3>{{ filament.filamentColor }}</h3>
+                <p>Material: {{ filament.filamentMaterial }}</p>
+                <p>{{ filament.filamentDescription }}</p>
+              </div>
+            </label>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="submit-btn">Submit Order</button>
+  </form>
+</div>
 
 {% endblock %}
 

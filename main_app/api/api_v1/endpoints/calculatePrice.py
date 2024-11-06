@@ -17,6 +17,8 @@ from tempfile import mkdtemp
 
 from main_app.db_models import PotentialOrdersFromEstimate
 
+from main_app.schemas import calculatePriceResponse
+
 router = APIRouter()
 
 templates = Jinja2Templates(directory="templates")
@@ -25,21 +27,18 @@ load_dotenv()
 
 router = APIRouter()
 
+
 @router.post("/")
-async def calculate_price(request: Request, to_calculate: UploadFile = File(...)):
-    """
-    Calculate the price of the plastic based on the given data.
-
-    Parameters:
-    - to_calculate (file): The file containing the data to calculate the price.
-
-    Returns:
-    - JSONResponse: The response containing the calculated price.
-    """
+async def calculate_price(
+    request: Request, to_calculate: UploadFile = File(...)
+) -> calculatePriceResponse:
     file_extension = os.path.splitext(to_calculate.filename)[1]
     if file_extension.lower() != ".stl":
-        return JSONResponse(status_code=400, content={"message": "Invalid file format. Only .stl files are allowed."})
-    
+        return JSONResponse(
+            status_code=400,
+            content={"message": "Invalid file format. Only .stl files are allowed."},
+        )
+
     unique_dir = mkdtemp()
     stl_file_path = os.path.join(unique_dir, f"{uuid.uuid4()}.stl")
     gcode_file_path = os.path.join(unique_dir, f"{uuid.uuid4()}.gcode")
@@ -54,13 +53,15 @@ async def calculate_price(request: Request, to_calculate: UploadFile = File(...)
     if result.returncode != 0:
         print("Error:", result.stderr)
         shutil.rmtree(unique_dir)
-        return JSONResponse(status_code=500, content={"message": "Error processing the file."})
+        return JSONResponse(
+            status_code=500, content={"message": "Error processing the file."}
+        )
 
     filament_used = 0.0
     total_hours = 0.0
 
     try:
-        with open(gcode_file_path, 'r') as gcode_file:
+        with open(gcode_file_path, "r") as gcode_file:
             for line in gcode_file:
                 if "filament used [g]" in line:
                     filament_used_match = re.search(r"(\d+(\.\d+)?)", line)
@@ -101,4 +102,10 @@ async def calculate_price(request: Request, to_calculate: UploadFile = File(...)
 
     # return templates.TemplateResponse("result.html.jinja", {"request": request, "price": price, "filament_used": filament_used, "total_hours": total_hours})
 
-    return {"price": price, "filament_used": filament_used, "total_hours": total_hours, "order_id": str(new_order.orderID)}
+    # return {"price": price, "filament_used": filament_used, "total_hours": total_hours, "order_id": str(new_order.orderID)}
+    return calculatePriceResponse(
+        price=price,
+        filament_used=filament_used,
+        total_hours=total_hours,
+        order_id=str(new_order.orderID),
+    )
