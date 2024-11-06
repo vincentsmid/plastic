@@ -35,45 +35,8 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding: 5rem 2rem;
+  padding: 2rem 2rem;
   width: 80vw;
-}
-
-/* Index styles */
-
-.card {
-  display: flex;
-  align-items: center;
-  background-color: var(--secondary-backgroud-color);
-  padding: 2.5rem;
-  margin: 3rem 0;
-  display: flex;
-  flex-direction: column;
-  width: 35rem;
-  height: 48rem;
-  margin: 2rem 1.6rem;
-  position: relative;
-}
-
-.card-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-
-.card button {
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 1.6rem;
-  width: 30rem;
-  font-size: 1.6rem;
-}
-
-.card button:hover {
-  background-color: var(--primary-color);
-  color: var(--text-color);
-  border: 0.1rem solid var(--primary-color);
 }
 
 /* Calculator styles */
@@ -273,7 +236,7 @@ img {
   height: auto;
 }
 
-@media screen and (min-width: 2560px) and (max-width: 3839px) {
+@media screen and (min-width: 2400px) and (max-width: 3600px) {
   html {
       font-size: 91.75%; /* Adjusted font size for 1440p screens */
   }
@@ -281,7 +244,7 @@ img {
 }
 
 /* Media Query for 4K screens */
-@media screen and (min-width: 3840px) {
+@media screen and (min-width: 3601px) {
   html {
       font-size: 125%; /* Adjusted font size for 4K screens */
   }
