@@ -3,10 +3,12 @@
 {% block content %}
 <div class="main-page">
   <div class="text">
-    <p style="font-size: 2.4rem">Welcome to Vincent's printing service.</p>
-    <p style="font-size: 2.4rem">Here you can calculate the price of your 3D print, shop for 3D prints, or request a custom design.</p>
+    <h1>Welcome to the Plastic Lab printing service.</h1>
+    <p>Here you can calculate the price of your 3D print, shop for 3D prints (soon), or request a custom design.</p>
+    </p><a href="mailto:info@plasticlab.xyz">You can send me an <u>e-mail</u>.</a></p>
+    <p><a href="https://discord.gg/apyDuC2MaM">Or you can join my <u>Discord server</u>.</a></p>
   </div>  
-  {% with id="one", path="/static/snorlax.stl", zoom="false" %}
+  {% with id="one", path="/static/snorlax.stl", zoom="false", height="70rem" %}
     {% include "3drender.html.jinja" %}
   {% endwith %}
 </div>
@@ -15,13 +17,17 @@
   .main-page {
     display: flex;
     flex-direction: row-reverse;
-    align-items: space-between;
-    justify-content: top;
+    align-items: top;
+    justify-content: space-between;
     max-height: 60vh;
   }
 
   .text {
     margin: 4rem 12rem;
+  }
+
+  p, h1, a {
+    font-size: 2.4rem;
   }
 </style>
 {% endblock %}
