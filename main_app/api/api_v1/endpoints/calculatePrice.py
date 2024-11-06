@@ -93,6 +93,10 @@ async def calculate_price(
 
     price = 8 + total_hours + filament_used * 0.05
 
+    price = round(price, 1)
+    total_hours = round(total_hours, 2)
+    filament_used = round(filament_used, 2)
+
     new_order = PotentialOrdersFromEstimate(
         orderValue=price,
         printTime=total_hours,
