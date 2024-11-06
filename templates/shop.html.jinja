@@ -1,68 +1,29 @@
 {% extends 'base.html.jinja' %}
 
 {% block content %}
-  <p style="font-size: 2.4rem">Here you can find some pre-made shit i've made. Enjoy, pussies.</p>
+  <p style="font-size: 2rem">Here you can find examples of what can be printed. Soon available as a shop.</p>
+  <p style="font-size: 2rem">Many more custom and non-custom 3D models coming soon.</p>
 
   <section class="shop-items">
     <article>
-      {% with id="one", path="/static/model.stl", zoom="false" %}
+      {% with id="one", path="/static/cygnus.stl", zoom="false", height="40rem" %}
         {% include "3drender.html.jinja" %}
       {% endwith %}
 
-      <h2>good keeb cover</h2>
-      <p>verz good, extremelz good for everzthing that resembles a keebord.</p>
+      <h2>Cygnus keyboard</h2>
+      <p>Opensource ergo keyboard made by juhakaup.</p>
 
-      <button>buy!</button>
+      <button>dead link for now</button>
     </article>
     <article>
-      {% with id="two", path="/static/model.stl", zoom="false" %}
+      {% with id="two", path="/static/dactyl.stl", zoom="false", height="40rem" %}
         {% include "3drender.html.jinja" %}
       {% endwith %}
 
-      <h2>good keeb cover</h2>
-      <p>verz good, extremelz good for everzthing that resembles a keebord.</p>
+      <h2>Dactyl keyboard</h2>
+      <p>Opensource ergo keyboard made by okke-formsma.</p>
 
-      <button>buy!</button>
-    </article>
-    <article>
-      {% with id="three", path="/static/model.stl", zoom="false" %}
-        {% include "3drender.html.jinja" %}
-      {% endwith %}
-
-      <h2>good keeb cover</h2>
-      <p>verz good, extremelz good for everzthing that resembles a keebord.</p>
-
-      <button>buy!</button>
-    </article>
-    <article>
-      {% with id="four", path="/static/model.stl", zoom="false" %}
-        {% include "3drender.html.jinja" %}
-      {% endwith %}
-
-      <h2>good keeb cover</h2>
-      <p>verz good, extremelz good for everzthing that resembles a keebord.</p>
-
-      <button>buy!</button>
-    </article>
-    <article>
-      {% with id="five", path="/static/model.stl", zoom="false" %}
-        {% include "3drender.html.jinja" %}
-      {% endwith %}
-
-      <h2>good keeb cover</h2>
-      <p>verz good, extremelz good for everzthing that resembles a keebord.</p>
-
-      <button>buy!</button>
-    </article>
-    <article>
-      {% with id="six", path="/static/model.stl", zoom="false" %}
-        {% include "3drender.html.jinja" %}
-      {% endwith %}
-
-      <h2>good keeb cover</h2>
-      <p>verz good, extremelz good for everzthing that resembles a keebord.</p>
-
-      <button>buy!</button>
+      <button>dead link for now</button>
     </article>
   </section>
 
