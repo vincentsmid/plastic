@@ -91,7 +91,7 @@ async def calculate_price(
     finally:
         shutil.rmtree(unique_dir)
 
-    price = 8 + total_hours + filament_used * 0.05
+    price = 6 + (total_hours * 1.75)+ (filament_used * 0.05)
 
     price = round(price, 1)
     total_hours = round(total_hours, 2)
