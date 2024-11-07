@@ -9,7 +9,7 @@ from pydantic import BaseModel
 # from main_app.db_models import ()
 from piccolo.apps.user.tables import BaseUser
 from piccolo_admin.endpoints import create_admin
-from main_app.db_models import PotentialOrdersFromEstimate, FilamentsStock, SpecialSale
+from main_app.db_models import PotentialOrdersFromEstimate, FilamentsStock, SpecialSale, ItemsForSale
 
 from main_app.api.api_admin import router as admin_router
 from main_app.api.api_v1 import router as api_router
@@ -26,6 +26,8 @@ admin = create_admin(
         BaseUser,
         PotentialOrdersFromEstimate,
         FilamentsStock,
+        SpecialSale,
+        ItemsForSale
     ]  # Add any Piccolo tables you want to manage here.
 )
 
@@ -88,8 +90,9 @@ async def render_results(request: Request, order_id: str):
 
 @app.get("/shop")
 async def shop_render(request: Request):
+    items = await ItemsForSale.objects().where(ItemsForSale.available == True).run()
     return templates.TemplateResponse(
-        "shop.html.jinja", {"request": request, "app_name": "Plastic Lab"}
+        "shop.html.jinja", {"request": request, "app_name": "Plastic Lab", "items": items}
     )
 
 @app.get("/information")

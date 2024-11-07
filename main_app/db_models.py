@@ -14,14 +14,16 @@ class FilamentsStock(Table):
     available = Boolean()
 
 
-class ItemForSale(Table):
+class ItemsForSale(Table):
     itemID = UUID(primary_key=True, default=uuid.uuid4, unique=True)
+    itemLink = Varchar()
     itemName = Varchar()
     itemPrice = Real()
     itemDescription = Varchar()
     itemModel = Varchar()
-    itemPicure = Varchar()
+    itemPicture = Varchar()
     available = Boolean()
+    itemRenderID = Varchar()
 
 
 class SpecialSale(Table):

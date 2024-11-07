@@ -5,26 +5,20 @@
   <p style="font-size: 2rem">Many more custom and non-custom 3D models coming soon.</p>
 
   <section class="shop-items">
-    <article>
-      {% with id="one", path="/static/cygnus.stl", zoom="false", height="40rem" %}
-        {% include "3drender.html.jinja" %}
-      {% endwith %}
+    {% for item in items %}
+      {% if item.available %}
+        <article>
+          {% with id=item.itemRenderID, path=item.itemModel, zoom="false", height="40rem" %}
+            {% include "3drender.html.jinja" %}
+          {% endwith %}
 
-      <h2>Cygnus keyboard</h2>
-      <p>Opensource ergo keyboard made by juhakaup.</p>
+          <h2>{{ item.itemName }}</h2>
+          <p>{{ item.itemDescription }}</p>
 
-      <button>dead link for now</button>
-    </article>
-    <article>
-      {% with id="two", path="/static/dactyl.stl", zoom="false", height="40rem" %}
-        {% include "3drender.html.jinja" %}
-      {% endwith %}
-
-      <h2>Dactyl keyboard</h2>
-      <p>Opensource ergo keyboard made by okke-formsma.</p>
-
-      <button>dead link for now</button>
-    </article>
+          <button><a style="padding: 2.5rem 19.5rem" href="{{ item.itemLink }}">More</a></button>
+        </article>
+      {% endif %}
+    {% endfor %}
   </section>
 
 {% endblock %}
