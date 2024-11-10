@@ -37,6 +37,7 @@ body {
   margin: 0 auto;
   padding: 2rem 2rem;
   width: 80vw;
+  overflow: hidden;
 }
 
 /* Calculator styles */
@@ -147,7 +148,7 @@ svg {
 }
 
 .top-bar button {
-  margin-left: 2rem;
+  margin: 0 1rem 0 1rem;
   min-width: 5rem;
   border: none;
   font-size: 1.6rem;
@@ -158,6 +159,18 @@ svg {
   display: flex;
   justify-content: space-between;
   max-width: fit-content;
+  align-items: center;
+}
+
+@media (max-width: 970px) {
+  .right-buttons {
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .top-bar a {
+    font-size: 3.4rem;
+  }
 }
 
 /* Footer styles */

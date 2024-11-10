@@ -3,6 +3,7 @@ import logging
 from fastapi import FastAPI, Request, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
 
 from pydantic import BaseModel
 
@@ -19,7 +20,21 @@ configure_logging()
 logger = logging.getLogger(__name__)
 logger.info("Server restarted")
 
-app = FastAPI()
+origins = [
+    "https://printlab.xyz",
+    "https://www.printlab.xyz",
+]
+
+app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 templates = Jinja2Templates(directory="templates")
 admin = create_admin(
     tables=[
@@ -81,7 +96,7 @@ async def render_results(request: Request, order_id: str):
             "price": data.orderValue,
             "filament_used": data.filamentUsed,
             "total_hours": data.printTime,
-            "app_name": "Plastic",
+            "app_name": "Plastic Lab",
             "order_id": order_id,
             "filament_available": filament,
         },

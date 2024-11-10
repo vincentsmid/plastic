@@ -1,153 +1,152 @@
-{% extends 'base.html.jinja' %}
 
 {% block content %}
-<div class="results">
-  <h1 style="font-size: 2.4rem">Calculation Results</h1>
-  <p style="font-size: 1rem">Keep in mind the numbers are approximate and the final price is discussed personally.</p>
-  <p>Approximate base price: <b>{{ price }} euros</b></p>
-  <p style="font-size: 1rem">If you want a more accurate quote, choose a material below, enter your e-mail and we will get in touch.</p>
+  <div class="main-content">
+    <div class="results">
+      <h1 style="font-size: 2.4rem">Calculation Results</h1>
+      <p style="font-size: 1rem">Keep in mind the numbers are approximate and the final price is discussed personally.</p>
+      <p>Approximate base price: <b>{{ price }} euros</b></p>
+      <p style="font-size: 1rem">If you want a more accurate quote, choose a material below, enter your e-mail and we will get in touch.</p>
 
-  {# <input type="hidden" id="original_price" value="{{ price }}">
-  <p><strong>Price:</strong> <span id="displayed_price">{{ price | safe }}</span></p>
-  <p><strong>Filament Used:</strong> {{ filament_used | safe }} grams</p>
-  <p><strong>Total Printing Hours:</strong> {{ total_hours | safe }}</p>
-  <p>Order ID: {{ order_id }}</p> #}
+      {# <input type="hidden" id="original_price" value="{{ price }}">
+      <p><strong>Price:</strong> <span id="displayed_price">{{ price | safe }}</span></p>
+      <p><strong>Filament Used:</strong> {{ filament_used | safe }} grams</p>
+      <p><strong>Total Printing Hours:</strong> {{ total_hours | safe }}</p>
+      <p>Order ID: {{ order_id }}</p> #}
 
-  <form action="/api/v1/submitorder" method="POST">
-    <input type="hidden" name="order_id" value="{{ order_id }}">
+      <form action="/api/v1/submitorder" method="POST">
+        <input type="hidden" name="order_id" value="{{ order_id }}">
 
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-    </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
 
-    <div class="filament-grid">
-      {% for filament in filament_available %}
-        {% if filament.available %}
-          <div class="filament-card">
-            <input type="radio" id="filament_{{ filament.filamentID }}" 
-                   name="filament_id" value="{{ filament.filamentID }}" required>
-            <label for="filament_{{ filament.filamentID }}" class="filament-label">
-              <img src="{{ filament.filamentPicture }}" alt="{{ filament.filamentMaterial }} {{ filament.filamentColor }}">
-              <div class="filament-info">
-                <h3>{{ filament.filamentColor }}</h3>
-                <p>Material: {{ filament.filamentMaterial }}</p>
-                <p>{{ filament.filamentDescription }}</p>
-                <p style="font-size: 1.8rem;">{{ filament.filamentPriceMultiplier * price }}€</p>
+        <div class="filament-grid">
+          {% for filament in filament_available %}
+            {% if filament.available %}
+              <div class="filament-card">
+                <input type="radio" id="filament_{{ filament.filamentID }}" 
+                      name="filament_id" value="{{ filament.filamentID }}" required>
+                <label for="filament_{{ filament.filamentID }}" class="filament-label">
+                  <img src="{{ filament.filamentPicture }}" alt="{{ filament.filamentMaterial }} {{ filament.filamentColor }}">
+                  <div class="filament-info">
+                    <h3>{{ filament.filamentColor }}</h3>
+                    <p>Material: {{ filament.filamentMaterial }}</p>
+                    <p>{{ filament.filamentDescription }}</p>
+                    <p style="font-size: 1.8rem;">{{ filament.filamentPriceMultiplier * price }}€</p>
+                  </div>
+                </label>
               </div>
-            </label>
-          </div>
-        {% endif %}
-      {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Quote</button>
+      </form>
     </div>
+  </div>
 
-    <button type="submit" class="submit-btn">Submit Quote</button>
-  </form>
-</div>
-
-<style>
-.submit-btn {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 3rem 5rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 3rem;
-  position: fixed;
-  bottom: 35px;
-  right: 35px;
-}
-
-.filament-card {
-  border: 1px solid var(--text-color);
-  overflow: hidden;
-  position: relative;
-  height: 100%;
-}
-
-.filament-card input[type="radio"] {
-  display: none;
-}
-
-.filament-label {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-}
-
-.filament-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.filament-info {
-  padding: 15px;
-  height: 100%; 
-}
-
-.filament-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 2fr));
-  gap: 3rem;
-  margin: 20px 0;
-  align-items: stretch;
-}
-
-.filament-card input[type="radio"] + .filament-label {
-  border: 5px solid transparent;
-}
-
-.filament-card input[type="radio"]:checked + .filament-label {
-  border: 5px solid var(--primary-color);
-  box-shadow: 0 0 10px rgba(0,123,255,0.3);
-}
-
-.form-group {
-  margin-bottom: 20px;
-  max-width: 20rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-group input[type="email"] {
-  box-sizing: border-box;
-  font-family: inherit;
-  font-size: 14px;
-  vertical-align: baseline;
-  font-weight: 400;
-  line-height: 1.29;
-  letter-spacing: .16px;
-  border-radius: 0;
-  outline: 2px solid transparent;
-  outline-offset: -2px;
-  width: 100%;
-  height: 40px;
-  border: none;
-  border-bottom: 1px solid #8d8d8d;
-  background-color: #f4f4f4;
-  padding: 0 16px;
-  color: #161616;
-  transition: background-color 70ms cubic-bezier(.2,0,.38,.9),outline 70ms cubic-bezier(.2,0,.38,.9);  
-  :focus{
-      outline: 2px solid #0f62fe;
-      outline-offset: -2px;
+  <style>
+  .submit-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 3rem 5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 2rem;
+    position: fixed;
+    bottom: 35px;
+    right: 35px;
   }
-}
 
-input:hover {
-  background-color: var(--text-color);
-}
+  .filament-card {
+    border: 1px solid var(--text-color);
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+  }
 
+  .filament-card input[type="radio"] {
+    display: none;
+  }
 
+  .filament-label {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
 
-</style>
+  .filament-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .filament-info {
+    padding: 15px;
+    height: 100%; 
+  }
+
+  .filament-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 2fr));
+    gap: 3rem;
+    margin: 20px 0;
+    align-items: stretch;
+  }
+
+  .filament-card input[type="radio"] + .filament-label {
+    border: 5px solid transparent;
+  }
+
+  .filament-card input[type="radio"]:checked + .filament-label {
+    border: 5px solid var(--primary-color);
+    box-shadow: 0 0 10px rgba(0,123,255,0.3);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    max-width: 20rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .form-group input[type="email"] {
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 14px;
+    vertical-align: baseline;
+    font-weight: 400;
+    line-height: 1.29;
+    letter-spacing: .16px;
+    border-radius: 0;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid #8d8d8d;
+    background-color: #f4f4f4;
+    padding: 0 16px;
+    color: #161616;
+    transition: background-color 70ms cubic-bezier(.2,0,.38,.9),outline 70ms cubic-bezier(.2,0,.38,.9);  
+    :focus{
+        outline: 2px solid #0f62fe;
+        outline-offset: -2px;
+    }
+  }
+
+  input:hover {
+    background-color: var(--text-color);
+  }
+
+  </style>
 
 {% endblock %}
 

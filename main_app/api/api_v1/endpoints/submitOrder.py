@@ -12,6 +12,8 @@ from main_app.db_models import PotentialOrdersFromEstimate, FilamentsStock
 
 from main_app.schemas import submitOrderResponse, submitOrderInput
 
+from main_app.send_mail import send_order_confirmation_email
+
 router = APIRouter()
 
 
@@ -31,6 +33,10 @@ async def submit_order(
         existing_order.orderValue = filament.filamentPriceMultiplier * existing_order.orderValue
 
         await existing_order.save()
+
+        email_sent = send_order_confirmation_email(email, existing_order.orderValue)
+        if not email_sent:
+            logging.warning(f"Failed to send confirmation email to {email}")
 
         return RedirectResponse(url="/api/v1/submitorder/success", status_code=303)
 

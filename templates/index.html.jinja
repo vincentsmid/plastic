@@ -4,11 +4,11 @@
 <div class="main-page">
   <div class="text">
     <h1>Welcome to the Plastic Lab printing service.</h1>
-    <p>Here you can calculate the price of your 3D print, shop for 3D prints (soon), or request a custom design.</p>
+    <p>Here you can calculate the price of your 3D print and shop for 3D prints (soon). If you want a custom design or anything printed, get in touch.</p>
     </p><a href="mailto:info@plasticlab.xyz">You can send me an <u>e-mail</u>.</a></p>
     <p><a href="https://discord.gg/apyDuC2MaM">Or you can join my <u>Discord server</u>.</a></p>
-  </div>  
-  {% with id="one", path="/static/snorlax.stl", zoom="false", height="70rem" %}
+  </div>
+  {% with id="one", path="/static/snorlax.stl", zoom="false", height="60vh" %}
     {% include "3drender.html.jinja" %}
   {% endwith %}
 </div>
@@ -19,15 +19,36 @@
     flex-direction: row-reverse;
     align-items: top;
     justify-content: space-between;
-    max-height: 60vh;
+    max-height: 100%;
   }
 
   .text {
-    margin: 4rem 12rem;
+    margin: 4rem 0 0 4rem;
   }
 
   p, h1, a {
     font-size: 2.4rem;
   }
+
+  @media (max-width: 1100px) {
+    .main-page {
+      font-size: 0.4rem;
+      max-height: 80vh;
+      display: block;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .text {
+      margin: 5rem 0 0 0;
+    }
+
+    p, h1, a {
+      font-size: 1.6rem;
+    }
+  }
+
+
+
 </style>
 {% endblock %}
