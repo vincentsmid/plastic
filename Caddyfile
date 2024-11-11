@@ -2,7 +2,8 @@
     admin off
 }
 
-your-domain.com {
+plasticlab.xyz {
+    tls internal
     bind :9080 :9443
     reverse_proxy fastapi_app:8000
 }
