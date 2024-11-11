@@ -12,7 +12,9 @@ services:
 
   caddy:
     image: caddy:2-alpine
-    network_mode: "host"
+    ports:
+      - "9080:9080"
+      - "9443:9443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
