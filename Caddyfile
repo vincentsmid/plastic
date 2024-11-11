@@ -1,3 +1,8 @@
-plasticlab.xyz {
-  reverse_proxy fastapi_app:8000
+{
+    admin off
+}
+
+your-domain.com {
+    bind :9080 :9443
+    reverse_proxy fastapi_app:8000
 }

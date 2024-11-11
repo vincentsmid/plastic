@@ -14,15 +14,14 @@ services:
 
   caddy:
     image: caddy:2-alpine
-    ports:
-      - "80:80"
-      - "443:443"
+    network_mode: "host"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
       - fastapi_app
+
 
 volumes:
   caddy_data:
