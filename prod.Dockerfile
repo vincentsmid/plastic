@@ -17,6 +17,6 @@ RUN pip install poetry
 RUN poetry config virtualenvs.create false \
     && poetry install --no-dev
 
-CMD ["sh", "-c", "bash /usr/src/app/bin/dev/migrate.sh && poetry run uvicorn main_app.main:app --reload --host 0 --port 8000"]
+CMD ["sh", "-c", "bash /usr/src/app/bin/prod/migrate.sh && poetry run uvicorn main_app.main:app --reload --host 0 --port 8000"]
 
 EXPOSE 8000
