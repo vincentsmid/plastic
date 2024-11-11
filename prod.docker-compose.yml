@@ -4,7 +4,7 @@ services:
   fastapi_app:
     build:
       context: .
-      dockerfile: dev.Dockerfile
+      dockerfile: prod.Dockerfile
     volumes:
       - .:/usr/src/app
     expose:
