@@ -21,15 +21,15 @@ logger = logging.getLogger(__name__)
 logger.info("Server restarted")
 
 origins = [
-    "https://printlab.xyz",
-    "https://www.printlab.xyz",
+    "https://plasticlab.xyz",
+    "https://www.plasticlab.xyz",
 ]
 
-app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
