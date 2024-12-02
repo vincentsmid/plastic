@@ -8,7 +8,7 @@ RUN wget https://github.com/prusa3d/PrusaSlicer/releases/download/version_2.7.2/
 
 RUN tar -xjf prusaslicer.tar.bz2 -C /opt/ && rm prusaslicer.tar.bz2
 
-RUN ln -s /opt/PrusaSlicer-2.7.2+linux-arm64-GTK3-202402291318/prusa-slicer /usr/local/bin/prusaslicer
+RUN ln -s /opt/PrusaSlicer-2.7.2+linux-x64-GTK2-202402291326/prusa-slicer /usr/local/bin/prusaslicer
 
 COPY . /usr/src/app
 
