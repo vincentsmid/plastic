@@ -41,42 +41,39 @@ function handleFile(e) {
 // Upload file function for calculator
 
 async function uploadFile(file) {
-  document.getElementById('loadingIndicator').style.display = 'block';
-  document.getElementById('fileInput').disabled = true;
+  try {
+    document.getElementById('loadingIndicator').style.display = 'block';
+    document.getElementById('fileInput').disabled = true;
 
-  longLoadMessage();
-  
-  const formData = new FormData();
-  formData.append('to_calculate', file);
+    longLoadMessage();
 
-  fetch('/api/v1/calculateprice', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
+    const form = new FormData();
+    form.append('to_calculate', file);
+
+    const options = {
+      method: 'POST',
+      body: form
+    };
+
+    const response = await fetch('https://plasticlab.xyz/api/v1/calculateprice/', options);
+    const data = await response.json();
+
     if (data.price && data.filament_used && data.total_hours && data.order_id) {
-      const url = `/calculator-results/${data.order_id}`;
-
-      fetch(url)
-      .then(response => response.text())
-      .then(html => {
-          document.body.innerHTML = html;
-      })
-      .catch(error => {
-          console.error('Error:', error);
-      });
+      const resultsResponse = await fetch(`/calculator-results/${data.order_id}`);
+      const html = await resultsResponse.text();
+      document.body.innerHTML = html;
     } else {
       document.getElementById('loadingIndicator').style.display = 'none';
       document.getElementById('fileInput').disabled = false;
       document.getElementById('errorIndicator').style.display = 'block';
     }
-  })
-  .catch(error => {
+  } catch (error) {
     document.getElementById('loadingIndicator').style.display = 'none';
-    console.error(error);
-  });
+    document.getElementById('fileInput').disabled = false;
+    console.error('Error:', error);
+  }
 }
+
 
 // Function for displaying a "long load" message
 
