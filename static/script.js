@@ -55,7 +55,7 @@ async function uploadFile(file) {
       body: form
     };
 
-    const response = await fetch('https://plasticlab.xyz/api/v1/calculateprice/', options);
+    const response = await fetch('/api/v1/calculateprice/', options);
     const data = await response.json();
 
     if (data.price && data.filament_used && data.total_hours && data.order_id) {
