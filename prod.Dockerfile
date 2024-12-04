@@ -2,16 +2,17 @@ FROM python:3.11-bullseye
 
 WORKDIR /usr/src/app
 
-RUN apt-get update && apt-get install -y \
-    wget \
+RUN apt-get update \
+  && apt-get install -y \
     bzip2 \
     libc6 \
-    libgtk-3-0 \
-    libgl1 \
-    mesa-utils \
-    libegl1 \
     libegl-mesa0 \
-    && rm -rf /var/lib/apt/lists/*
+    libegl1 \
+    libgl1 \
+    libgtk-3-0 \
+    mesa-utils \
+    wget \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/prusa3d/PrusaSlicer/releases/download/version_2.7.2/PrusaSlicer-2.7.2+linux-x64-GTK3-202402291307.tar.bz2  -O prusaslicer.tar.bz2
 
