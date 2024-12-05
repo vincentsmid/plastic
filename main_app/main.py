@@ -1,9 +1,15 @@
 import logging
+import json
 
-from fastapi import FastAPI, Request, Form
+from fastapi import FastAPI, Request, Depends
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
+
+from main_app.redis_client import cache_page
+
+from functools import wraps
 
 from pydantic import BaseModel
 
@@ -46,8 +52,8 @@ admin = create_admin(
     ]  # Add any Piccolo tables you want to manage here.
 )
 
-
 @app.get("/")
+@cache_page(expire_time=3600) 
 async def root(request: Request):
     current_sales = await SpecialSale.objects().where(SpecialSale.active == True).run()
     return templates.TemplateResponse(
@@ -57,6 +63,7 @@ async def root(request: Request):
 
 
 @app.get("/calculator")
+@cache_page(expire_time=3600)
 async def calculator_render(request: Request):
     filament_available = (
         await FilamentsStock.objects().where(FilamentsStock.available == True).run()
@@ -78,6 +85,7 @@ class ResultData(BaseModel):
 
 
 @app.get("/calculator-results/{order_id}")
+@cache_page(expire_time=3600)
 async def render_results(request: Request, order_id: str):
     filament = (
         await FilamentsStock.objects().where(FilamentsStock.available == True).run()
@@ -104,6 +112,7 @@ async def render_results(request: Request, order_id: str):
 
 
 @app.get("/shop")
+@cache_page(expire_time=3600)
 async def shop_render(request: Request):
     items = await ItemsForSale.objects().where(ItemsForSale.available == True).run()
     return templates.TemplateResponse(
@@ -111,6 +120,7 @@ async def shop_render(request: Request):
     )
 
 @app.get("/information")
+@cache_page(expire_time=3600)
 async def information_render(request: Request):
     return templates.TemplateResponse(
         "information.html.jinja", {"request": request, "app_name": "Plastic Lab"}

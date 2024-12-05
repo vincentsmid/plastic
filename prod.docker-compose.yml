@@ -9,6 +9,8 @@ services:
       - "8000"
     environment:
       - PYTHONUNBUFFERED=1
+    depends_on:
+      - redis
 
   caddy:
     image: caddy:2-alpine
@@ -22,6 +24,11 @@ services:
     depends_on:
       - fastapi_app
 
+  redis:
+    image: redis:latest
+    expose:
+      - "6379"
+    restart: unless-stopped
 
 volumes:
   caddy_data:
