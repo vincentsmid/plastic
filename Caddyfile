@@ -2,6 +2,6 @@
     admin off
 }
 
-plasticlab.xyz {
+www.plasticlab.xyz, plasticlab.xyz {
     reverse_proxy fastapi_app:8000
 }
