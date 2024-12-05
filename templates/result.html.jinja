@@ -33,7 +33,7 @@
                     <h3>{{ filament.filamentColor }}</h3>
                     <p>Material: {{ filament.filamentMaterial }}</p>
                     <p>{{ filament.filamentDescription }}</p>
-                    <p style="font-size: 1.8rem;">{{ filament.filamentPriceMultiplier * price }}€</p>
+                    <p style="font-size: 1.8rem;">{{ (filament.filamentPriceMultiplier*price)|round(1) }}€</p>
                   </div>
                 </label>
               </div>
