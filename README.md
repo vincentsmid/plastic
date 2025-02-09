@@ -9,6 +9,8 @@ Dev environment completely automatised on docker. - just run
 docker-compose up
 ```
 
+Development database password is adminadminadmin - user "admin"
+
 ## API documentation
 
 ### [Swagger UI](https://localhost:8000/docs)
